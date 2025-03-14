@@ -12,5 +12,5 @@ An interactive digital watercolor painting tool built with p5.js. It features a 
 🎨 Draw – Click and drag to paint.
 📏 Adjust Brush Size – Use the brush size slider.
 🌈 Change Colors – Use the color picker.
-🎭 Change Canvas Color – Select a new background color.
-❌ Clear Canvas – Press C to reset with your chosen background.
+🎭 Change Canvas Color – Select a new background color. updates automatically
+❌ Clear Canvas – Press C to reset to a clean slate
