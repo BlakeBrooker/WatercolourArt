@@ -19,9 +19,6 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(255);
-  image(canvasTexture, 0, 0);
-
   brushColor = color(0, 0, 0, 50);
   brushSize = 20;
   canvasColor = color(255);
@@ -37,12 +34,17 @@ function setup() {
   // Canvas Color Picker
   canvasColorPicker = createColorPicker(canvasColor);
   canvasColorPicker.position(10, 70);
+  
+  // Set initial background and texture
+  updateCanvasBackground();
+  
+  // Listen for canvas color changes
+  canvasColorPicker.input(updateCanvasBackground);
 }
 
 function draw() {
   brushColor = colorPicker.color();
   brushSize = brushSizeSlider.value();
-  canvasColor = canvasColorPicker.color();
 
   if (isDrawing) {
     watercolorBrush(mouseX, mouseY);
@@ -61,8 +63,12 @@ function watercolorBrush(x, y) {
     noStroke();
     ellipse(x + offsetX, y + offsetY, size, size);
   }
+}
 
-  brushStrokes.push({ x, y, size: brushSize, color: brushColor });
+// Function to update the canvas background instantly
+function updateCanvasBackground() {
+  background(canvasColorPicker.color());
+  image(canvasTexture, 0, 0);
 }
 
 // Mouse Controls
@@ -71,13 +77,4 @@ function mousePressed() {
 }
 function mouseReleased() {
   isDrawing = false;
-}
-
-// Clear Canvas
-function keyPressed() {
-  if (key === 'c') {
-    background(canvasColor);
-    image(canvasTexture, 0, 0);
-    brushStrokes = [];
-  }
 }
